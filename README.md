@@ -109,3 +109,5 @@ This website is continuously evolving as I learn and build new cybersecurity pro
 - YouTube: https://www.youtube.com/@TechEthix
 
 ---
+
+## Built with curiosity, consistency, and a passion for cybersecurity.
