@@ -1,10 +1,9 @@
-import { Project, Certification, ExperienceItem } from '@/types';
+import { WorkItem, Certification, ExperienceItem } from '@/types';
 
 export const personalInfo = {
   name: 'Smriti Priya Singh',
   title: 'Aspiring Security Analyst | B.Tech (CSE-CY) ’26',
   email: 'smritipriyasingh079@gmail.com',
-  phone: '+91 9770106079',
   location: 'Bhopal, MP, India',
   youtubeUrl: 'https://www.youtube.com/@TechEthix',
   youtubeHandle: '@TechEthix',
@@ -37,8 +36,8 @@ export const certifications: Certification[] = [
   { title: 'Ethical Hacking Essentials (EHE)', issuer: 'EC-Council', category: 'Offensive', badgeColor: 'bg-red-500/10 text-red-400 border-red-500/30' },
   { title: 'Oracle DevOps Certified', issuer: 'Oracle', category: 'Cloud & DevOps', badgeColor: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
   { title: 'Protecting a Device with Malwarebytes', issuer: 'IBM', category: 'Defensive', badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' },
-  { title: 'Cyber Security Privacy', issuer: 'NPTEL', category: 'Fundamentals', badgeColor: 'bg-slate-800 text-slate-300 border-slate-700' },
-  { title: 'Ethical Hacking', issuer: 'NPTEL', category: 'Fundamentals', badgeColor: 'bg-slate-800 text-slate-300 border-slate-700' },
+  { title: 'Cyber Security Privacy', issuer: 'NPTEL', category: 'Fundamentals', badgeColor: 'bg-zinc-800 text-zinc-300 border-zinc-700' },
+  { title: 'Ethical Hacking', issuer: 'NPTEL', category: 'Fundamentals', badgeColor: 'bg-zinc-800 text-zinc-300 border-zinc-700' },
 ];
 
 export const experiences: ExperienceItem[] = [
@@ -77,61 +76,74 @@ export const experiences: ExperienceItem[] = [
   }
 ];
 
-export const projectsData: Project[] = [
+export const workItems: WorkItem[] = [
   {
     id: 'eyes-without-compromise',
     slug: 'eyes-without-compromise',
-    title: 'Eyes Without Compromise – CCTV Network Security',
-    tagline: 'Defensive security solution protecting video surveillance networks from breaches.',
-    description: 'Developed a comprehensive security solution to prevent unauthorized access and data breaches in CCTV networks using port hardening, MAC address binding, default password checks, and anomaly detection.',
+    title: 'Eyes Without Compromise',
+    tagline: 'CCTV surveillance network defense & port hardening framework.',
+    description: 'Securing IP camera surveillance networks using port hardening, MAC binding, automated default password checks, and AI-based stream anomaly detection.',
+    status: '📅 Coming Soon',
     category: 'Network Security',
-    tags: ['Python', 'Shodan', 'Nmap', 'Kali Linux', 'MAC Filtering', 'IoT Security'],
-    githubUrl: 'https://github.com',
-    featured: true,
+    tags: ['Python', 'Shodan', 'Nmap', 'Kali Linux', 'MAC Filtering'],
     publishedDate: 'June 2025',
-    toolsUsed: ['Python', 'Shodan', 'Nmap', 'Kali OS'],
     highlights: [
-      'Implemented MAC address filtering and port hardening for surveillance cameras',
-      'Integrated default password check automated scanner script',
-      'Developed real-time anomaly detection logic for video streams'
-    ]
+      'MAC address binding & switch port hardening for camera streams',
+      'Automated default password vulnerability scanner',
+      'Anomaly detection logic for video surveillance feeds'
+    ],
+    toolsUsed: ['Python', 'Shodan', 'Nmap', 'Kali OS']
   },
   {
     id: 'ceh-v13-portal',
     slug: 'ceh-v13-portal',
-    title: 'CEH Portal – Web Platform for CEH v13 Practice',
-    tagline: 'Interactive web platform hosting module-wise CEH v13 practice questions.',
-    description: 'Created a responsive website that hosts CEH v13 module-wise practice questions with interactive navigation, SVG-animated sidebars, and a quiz-friendly UI for ethical hacking learners.',
+    title: 'CEH Portal',
+    tagline: 'Web platform hosting module-wise CEH v13 practice questions.',
+    description: 'Interactive web platform designed to host module-by-module practice questions, SVG-animated sidebars, and quiz navigation for ethical hacking learners.',
+    status: '🔒 Private',
     category: 'Web Security',
-    tags: ['HTML5', 'CSS3', 'JavaScript', 'SVG Animation', 'GitHub Pages', 'CEHv13'],
-    githubUrl: 'https://github.com',
-    demoUrl: 'https://smritipriyasingh.github.io/ceh-portal',
-    featured: true,
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'SVG Animation', 'CEHv13'],
     publishedDate: 'April 2025',
-    toolsUsed: ['HTML', 'CSS', 'JavaScript', 'SVG Animation', 'GitHub Pages'],
     highlights: [
-      'Module-wise structured practice quizzes aligned with EC-Council CEH v13 topics',
-      'SVG-animated sidebar navigation for smooth user experience',
-      'Deploys natively on GitHub Pages with lightweight static client architecture'
-    ]
+      'Module-wise structured quiz UI aligned with CEH v13 domains',
+      'SVG animated navigation sidebar',
+      'Static client-side score evaluation'
+    ],
+    toolsUsed: ['HTML', 'CSS', 'JavaScript', 'SVG Animation']
   },
   {
-    id: 'realtime-network-anomaly-detector',
-    slug: 'realtime-network-anomaly-detector',
-    title: 'Real-Time Enterprise Network Anomaly Detector',
-    tagline: 'Python packet analyzer for detecting network intrusions (Cisco Ideathon Finalist).',
-    description: 'A Python-based solution designed during Cisco Ideathon 2025 to analyze live traffic streams, detect malicious spikes, and push alert payloads directly to SOC dashboards.',
+    id: 'wazuh-soc-lab',
+    slug: 'wazuh-soc-lab',
+    title: 'Wazuh SOC Lab',
+    tagline: 'Self-hosted SIEM threat detection & Sysmon correlation lab.',
+    description: 'Threat detection homelab architecture analyzing Sysmon Process Creation (ID 1) and ProcessAccess (ID 10) logs against MITRE ATT&CK techniques.',
+    status: '🚧 In Progress',
     category: 'Threat Detection',
-    tags: ['Python', 'Scapy', 'Wireshark', 'SOC Automation', 'Packet Analysis'],
-    githubUrl: 'https://github.com',
-    featured: true,
+    tags: ['Wazuh', 'Sysmon', 'SIEM', 'MITRE ATT&CK', 'Linux Auditd'],
+    publishedDate: '2026',
+    highlights: [
+      'Custom Wazuh rule mapping against obfuscated PowerShell execution',
+      'Linux auditd rule tuning for sudoers privilege changes',
+      'Threat hunting log ingestion pipeline'
+    ],
+    toolsUsed: ['Wazuh SIEM', 'Sysmon', 'Elasticsearch', 'Docker']
+  },
+  {
+    id: 'cisco-anomaly-detector',
+    slug: 'cisco-anomaly-detector',
+    title: 'Enterprise Network Anomaly Detector',
+    tagline: 'Real-time PCAP analyzer and SOC alert automation pipeline.',
+    description: 'Python packet analyzer developed during Cisco Ideathon 2025 (Top 20 Finalist) to parse live traffic streams and dispatch alerts to SOC dashboards.',
+    status: '🚧 In Progress',
+    category: 'Threat Detection',
+    tags: ['Python', 'Scapy', 'Wireshark', 'SOC Automation', 'Cisco Ideathon'],
     publishedDate: 'March 2025',
-    toolsUsed: ['Python', 'Wireshark', 'Nmap', 'Netcat'],
     highlights: [
       'Ranked Top 20 Finalist out of 500+ national entries in Cisco Ideathon 2025',
-      'Proactive alert automation for Security Operations Center (SOC) integration',
-      'Parses PCAP telemetry in real time to spot unauthorized scanning activity'
-    ]
+      'Real-time packet inspection detecting SYN flood & port scan spikes',
+      'Proactive alert payload formatting for SOC integration'
+    ],
+    toolsUsed: ['Python', 'Scapy', 'Wireshark', 'Nmap']
   }
 ];
 

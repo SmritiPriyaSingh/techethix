@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { JournalFrontmatter, LabNoteFrontmatter } from '@/types';
+import { JournalFrontmatter, FieldNoteFrontmatter } from '@/types';
 
 const journalDir = path.join(process.cwd(), 'content/journal');
-const labNotesDir = path.join(process.cwd(), 'content/lab-notes');
+const fieldNotesDir = path.join(process.cwd(), 'content/field-notes');
 
 // --- JOURNAL FUNCTIONS ---
 
@@ -76,37 +76,37 @@ export function getJournalPostBySlug(slug: string): JournalPost | null {
   }
 }
 
-// --- LAB NOTES FUNCTIONS ---
+// --- FIELD NOTES FUNCTIONS ---
 
-export interface LabNotePost {
+export interface FieldNotePost {
   slug: string;
-  frontmatter: LabNoteFrontmatter;
+  frontmatter: FieldNoteFrontmatter;
   content: string;
 }
 
-export function getAllLabNotes(): LabNotePost[] {
-  if (!fs.existsSync(labNotesDir)) return [];
+export function getAllFieldNotes(): FieldNotePost[] {
+  if (!fs.existsSync(fieldNotesDir)) return [];
 
-  const fileNames = fs.readdirSync(labNotesDir);
+  const fileNames = fs.readdirSync(fieldNotesDir);
 
   const notes = fileNames
     .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
     .map((file) => {
       const slug = file.replace(/\.mdx?$/, '');
-      const fullPath = path.join(labNotesDir, file);
+      const fullPath = path.join(fieldNotesDir, file);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
 
       return {
         slug,
         frontmatter: {
-          title: data.title || 'Untitled Lab Note',
+          title: data.title || 'Untitled Field Note',
           slug,
           category: data.category || 'Networking',
           updatedAt: data.updatedAt || '2025-01-01',
           summary: data.summary || '',
           tags: data.tags || [],
-        } as LabNoteFrontmatter,
+        } as FieldNoteFrontmatter,
         content,
       };
     });
@@ -114,10 +114,10 @@ export function getAllLabNotes(): LabNotePost[] {
   return notes.sort((a, b) => new Date(b.frontmatter.updatedAt).getTime() - new Date(a.frontmatter.updatedAt).getTime());
 }
 
-export function getLabNoteBySlug(slug: string): LabNotePost | null {
+export function getFieldNoteBySlug(slug: string): FieldNotePost | null {
   try {
-    const fullPathMdx = path.join(labNotesDir, `${slug}.mdx`);
-    const fullPathMd = path.join(labNotesDir, `${slug}.md`);
+    const fullPathMdx = path.join(fieldNotesDir, `${slug}.mdx`);
+    const fullPathMd = path.join(fieldNotesDir, `${slug}.md`);
 
     const fullPath = fs.existsSync(fullPathMdx) ? fullPathMdx : fs.existsSync(fullPathMd) ? fullPathMd : null;
     if (!fullPath) return null;
@@ -128,13 +128,13 @@ export function getLabNoteBySlug(slug: string): LabNotePost | null {
     return {
       slug,
       frontmatter: {
-        title: data.title || 'Untitled Lab Note',
+        title: data.title || 'Untitled Field Note',
         slug,
         category: data.category || 'Networking',
         updatedAt: data.updatedAt || '2025-01-01',
         summary: data.summary || '',
         tags: data.tags || [],
-      } as LabNoteFrontmatter,
+      } as FieldNoteFrontmatter,
       content,
     };
   } catch {

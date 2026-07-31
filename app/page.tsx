@@ -1,19 +1,17 @@
 import React from 'react';
 import { Hero } from '@/components/Hero';
-import { CertificationsSection } from '@/components/CertificationsSection';
-import { FeaturedProjects } from '@/components/FeaturedProjects';
+import { CurrentWorkSection } from '@/components/CurrentWorkSection';
 import { LatestJournal } from '@/components/LatestJournal';
-import { LabNotesPreview } from '@/components/LabNotesPreview';
+import { FieldNotesPreview } from '@/components/FieldNotesPreview';
 import { TechEthixSection } from '@/components/TechEthixSection';
 
 export default function HomePage() {
   return (
     <div className="space-y-0">
       <Hero />
-      <CertificationsSection />
-      <FeaturedProjects />
+      <CurrentWorkSection />
       <LatestJournal />
-      <LabNotesPreview />
+      <FieldNotesPreview />
       <TechEthixSection />
     </div>
   );
