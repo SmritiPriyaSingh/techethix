@@ -4,12 +4,29 @@ export interface Project {
   slug: string;
   tagline: string;
   description: string;
-  category: 'Cloud Security' | 'Threat Detection' | 'AppSec' | 'DevSecOps' | 'Network Defense';
+  category: 'Network Security' | 'Web Security' | 'Threat Detection' | 'Ethical Hacking';
   tags: string[];
   githubUrl?: string;
   demoUrl?: string;
   featured: boolean;
   publishedDate: string;
+  highlights: string[];
+  toolsUsed: string[];
+}
+
+export interface Certification {
+  title: string;
+  issuer: string;
+  badgeColor?: string;
+  category: 'Offensive' | 'Defensive' | 'Cloud & DevOps' | 'Fundamentals';
+}
+
+export interface ExperienceItem {
+  role: string;
+  organization: string;
+  date: string;
+  description: string[];
+  highlightBadge?: string;
 }
 
 export interface JournalFrontmatter {
@@ -30,12 +47,4 @@ export interface LabNoteFrontmatter {
   updatedAt: string;
   summary: string;
   tags: string[];
-}
-
-export interface YouTubeVideo {
-  id: string;
-  title: string;
-  description: string;
-  videoUrl: string;
-  category: string;
 }

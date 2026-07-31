@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-base font-bold tracking-tight text-white flex items-center gap-1">
-                Smriti <span className="text-cyan-400 font-mono text-xs font-normal">/ TechEthic</span>
+                Smriti Priya Singh <span className="text-cyan-400 font-mono text-xs font-normal">/ TechEthix</span>
               </span>
             </div>
           </Link>

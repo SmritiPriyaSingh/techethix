@@ -1,0 +1,59 @@
+---
+title: "Real-Time Anomaly Detection in Enterprise Networks (Cisco Ideathon 2025)"
+publishedAt: "2025-03-20"
+summary: "Exploring packet analysis, baseline traffic profiling, and automated SOC alert generation for network intrusion detection."
+readingTime: "7 min read"
+category: "Threat Detection"
+tags: ["Python", "Cisco Ideathon", "Packet Analysis", "SOC Automation", "Wireshark"]
+featured: true
+---
+
+# Real-Time Anomaly Detection in Enterprise Networks
+
+During the **Cisco Ideathon 2025** (National Innovation Challenge), our team engineered a Python-based real-time anomaly detection system that ranked among the **Top 20 Finalists out of 500+ national entries**.
+
+Here is an architectural walkthrough of how packet parsing can automate Security Operations Center (SOC) alert triage.
+
+---
+
+## Architecture Overview
+
+1. **Traffic Ingestion**: Capturing raw network packets via Scapy/Wireshark hooks.
+2. **Baseline Profiling**: Calculating statistical thresholds for bandwidth usage, SYN packet rates, and unusual ICMP payloads.
+3. **Alert Dispatch**: Pushing JSON payloads directly to SOC dashboards for rapid analyst response.
+
+```text
+[ Live Network Interface ] ──> [ Scapy Packet Parser ] ──> [ Anomaly Threshold Evaluator ] ──> [ SOC Alert Dashboard ]
+```
+
+---
+
+## Python Detection Logic Snippet
+
+```python
+from scapy.all import sniff, TCP, IP
+import time
+
+syn_counter = {}
+
+def analyze_packet(packet):
+    if packet.haslayer(TCP) and packet.haslayer(IP):
+        src_ip = packet[IP].src
+        flags = packet[TCP].flags
+        
+        # Check for SYN Flood / Scanning behavior
+        if flags == 2:  # SYN flag
+            syn_counter[src_ip] = syn_counter.get(src_ip, 0) + 1
+            if syn_counter[src_ip] > 50:  # Threshold
+                print(f"[CRITICAL ALERT] Potential Port Scan / SYN Flood from IP: {src_ip}")
+
+# Start live sniffing on network interface
+# sniff(filter="tcp", prn=analyze_packet, store=0)
+```
+
+---
+
+## Key Takeaways for Security Analysts
+
+- **Proactive Baseline**: Knowing normal network behavior makes detecting anomalous spikes (like port scans or C2 beacons) straightforward.
+- **SOC Integration**: Alerts are only useful if they reach the monitoring team quickly with actionable contextual data.

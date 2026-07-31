@@ -1,0 +1,62 @@
+---
+title: "Securing Surveillance Networks: MAC Binding, Port Hardening & Default Password Checks"
+publishedAt: "2025-06-10"
+summary: "Insights from the Eyes Without Compromise project submitted to Yukti Innovation Challenge 2025, exploring IoT CCTV security controls."
+readingTime: "6 min read"
+category: "Network Security"
+tags: ["CCTV Security", "MAC Filtering", "Shodan", "Nmap", "IoT Defense"]
+featured: true
+---
+
+# Securing Surveillance Networks: Hardening CCTV & IoT Devices
+
+Video surveillance cameras (CCTV) represent one of the most vulnerable entry points in modern enterprise and physical security networks. Unhardened IP cameras frequently ship with default administrative credentials and unencrypted stream protocols.
+
+In this research writeup, we break down the security controls implemented in **Eyes Without Compromise** (submitted to the Yukti Innovation Challenge 2025).
+
+---
+
+## Key Vulnerabilities in CCTV Networks
+
+1. **Default Credentials**: Devices operating with `admin/admin` or `admin/12345` exposed to automated Shodan indexers.
+2. **Unrestricted Port Access**: Open RTSP (port 554) and HTTP management ports accessible without network segmentation.
+3. **MAC Address Spoofing**: Physical access to Ethernet drops allowing rouge laptop connections.
+
+---
+
+## Defensive Engineering Controls
+
+### 1. MAC Address Binding & Port Hardening
+
+By locking down switch ports directly to authorized camera MAC addresses, unauthorized rogue devices are immediately blocked at Layer 2:
+
+```bash
+# Example Nmap scan command to audit camera open ports & OS fingerprints
+nmap -p 80,554,8080 -sV --script http-auth-finder 192.168.1.0/24
+```
+
+### 2. Automated Default Password Scanner
+
+Using Python scripts to automate credential checks across internal IP ranges ensures zero unconfigured cameras remain online:
+
+```python
+import requests
+
+def check_default_credentials(ip, port=80):
+    default_creds = [('admin', 'admin'), ('admin', '12345'), ('root', 'pass')]
+    for user, pwd in default_creds:
+        try:
+            res = requests.get(f"http://{ip}:{port}/", auth=(user, pwd), timeout=3)
+            if res.status_code == 200:
+                print(f"[!] ALERT: Default credentials found on {ip} -> {user}:{pwd}")
+                return True
+        except Exception:
+            pass
+    return False
+```
+
+---
+
+## Conclusion & National Security Alignment
+
+Securing surveillance infrastructure requires combining network microsegmentation with proactive vulnerability audits. Project **Eyes Without Compromise** demonstrates how simple Python scripting and Nmap automation can prevent critical infrastructure breaches.

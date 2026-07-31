@@ -1,0 +1,43 @@
+---
+title: "Mastering Certified Ethical Hacker (CEH v13): Practice Strategy & Key Modules"
+publishedAt: "2025-04-15"
+summary: "A practical guide on preparing for EC-Council CEH v13 certification, module-wise quiz strategies, and hands-on tool usage."
+readingTime: "5 min read"
+category: "Ethical Hacking"
+tags: ["CEHv13", "EC-Council", "Ethical Hacking", "Nmap", "Metasploit"]
+featured: false
+---
+
+# Mastering CEH v13: Practice Strategy & Module Breakdown
+
+As a Certified Ethical Hacker (CEHv13 by EC-Council), building structured module-by-module practice questions was a key part of my exam preparation strategy. This inspired the creation of the **CEH Portal web platform**.
+
+---
+
+## Core Focus Modules in CEH v13
+
+1. **Footprinting & Reconnaissance**: Using Shodan, Nmap, Maltego, and Google Dorking for passive & active intelligence gathering.
+2. **System Hacking & Vulnerability Analysis**: Password cracking (John the Ripper, Hydra), privilege escalation techniques, and malware analysis.
+3. **Web Application Hacking**: OWASP Top 10 vulnerabilities (SQL Injection, XSS, CSRF) tested via Burp Suite and OWASP ZAP.
+4. **Wireless & IoT Security**: Aircrack-ng suite, WPA2 enterprise cracking, and Zigbee/CCTV security.
+
+---
+
+## Key Hands-on Command Cheat Sheet
+
+```bash
+# Nmap Aggressive Scan with OS detection & script scanning
+nmap -A -T4 target_ip
+
+# Burp Suite proxy listener setup on port 8080
+# Configure browser extension (FoxyProxy) to route traffic through 127.0.0.1:8080
+
+# John the Ripper hash cracking
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+```
+
+---
+
+## Final Exam Advice
+
+Combine theoretical study of protocols with hands-on practice on platforms like **TryHackMe**, **PicoCTF**, and **CEH Practice Portals**.
