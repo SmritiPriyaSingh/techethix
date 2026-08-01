@@ -1,29 +1,26 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { JournalFrontmatter, FieldNoteFrontmatter } from '@/types';
+import { BlogFrontmatter } from '@/types';
 
-const journalDir = path.join(process.cwd(), 'content/journal');
-const fieldNotesDir = path.join(process.cwd(), 'content/field-notes');
+const blogDir = path.join(process.cwd(), 'content/blog');
 
-// --- JOURNAL FUNCTIONS ---
-
-export interface JournalPost {
+export interface BlogPost {
   slug: string;
-  frontmatter: JournalFrontmatter;
+  frontmatter: BlogFrontmatter;
   content: string;
 }
 
-export function getAllJournalPosts(): JournalPost[] {
-  if (!fs.existsSync(journalDir)) return [];
+export function getAllBlogPosts(): BlogPost[] {
+  if (!fs.existsSync(blogDir)) return [];
 
-  const fileNames = fs.readdirSync(journalDir);
+  const fileNames = fs.readdirSync(blogDir);
 
   const posts = fileNames
     .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
     .map((file) => {
       const slug = file.replace(/\.mdx?$/, '');
-      const fullPath = path.join(journalDir, file);
+      const fullPath = path.join(blogDir, file);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
 
@@ -32,13 +29,13 @@ export function getAllJournalPosts(): JournalPost[] {
         frontmatter: {
           title: data.title || 'Untitled',
           slug,
-          publishedAt: data.publishedAt || '2025-01-01',
+          publishedAt: data.publishedAt || '2026-08-01',
           summary: data.summary || '',
           readingTime: data.readingTime || '5 min read',
           category: data.category || 'General',
           tags: data.tags || [],
           featured: data.featured || false,
-        } as JournalFrontmatter,
+        } as BlogFrontmatter,
         content,
       };
     });
@@ -46,10 +43,10 @@ export function getAllJournalPosts(): JournalPost[] {
   return posts.sort((a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime());
 }
 
-export function getJournalPostBySlug(slug: string): JournalPost | null {
+export function getBlogPostBySlug(slug: string): BlogPost | null {
   try {
-    const fullPathMdx = path.join(journalDir, `${slug}.mdx`);
-    const fullPathMd = path.join(journalDir, `${slug}.md`);
+    const fullPathMdx = path.join(blogDir, `${slug}.mdx`);
+    const fullPathMd = path.join(blogDir, `${slug}.md`);
 
     const fullPath = fs.existsSync(fullPathMdx) ? fullPathMdx : fs.existsSync(fullPathMd) ? fullPathMd : null;
     if (!fullPath) return null;
@@ -62,79 +59,13 @@ export function getJournalPostBySlug(slug: string): JournalPost | null {
       frontmatter: {
         title: data.title || 'Untitled',
         slug,
-        publishedAt: data.publishedAt || '2025-01-01',
+        publishedAt: data.publishedAt || '2026-08-01',
         summary: data.summary || '',
         readingTime: data.readingTime || '5 min read',
         category: data.category || 'General',
         tags: data.tags || [],
         featured: data.featured || false,
-      } as JournalFrontmatter,
-      content,
-    };
-  } catch {
-    return null;
-  }
-}
-
-// --- FIELD NOTES FUNCTIONS ---
-
-export interface FieldNotePost {
-  slug: string;
-  frontmatter: FieldNoteFrontmatter;
-  content: string;
-}
-
-export function getAllFieldNotes(): FieldNotePost[] {
-  if (!fs.existsSync(fieldNotesDir)) return [];
-
-  const fileNames = fs.readdirSync(fieldNotesDir);
-
-  const notes = fileNames
-    .filter((file) => file.endsWith('.mdx') || file.endsWith('.md'))
-    .map((file) => {
-      const slug = file.replace(/\.mdx?$/, '');
-      const fullPath = path.join(fieldNotesDir, file);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
-
-      return {
-        slug,
-        frontmatter: {
-          title: data.title || 'Untitled Field Note',
-          slug,
-          category: data.category || 'Networking',
-          updatedAt: data.updatedAt || '2025-01-01',
-          summary: data.summary || '',
-          tags: data.tags || [],
-        } as FieldNoteFrontmatter,
-        content,
-      };
-    });
-
-  return notes.sort((a, b) => new Date(b.frontmatter.updatedAt).getTime() - new Date(a.frontmatter.updatedAt).getTime());
-}
-
-export function getFieldNoteBySlug(slug: string): FieldNotePost | null {
-  try {
-    const fullPathMdx = path.join(fieldNotesDir, `${slug}.mdx`);
-    const fullPathMd = path.join(fieldNotesDir, `${slug}.md`);
-
-    const fullPath = fs.existsSync(fullPathMdx) ? fullPathMdx : fs.existsSync(fullPathMd) ? fullPathMd : null;
-    if (!fullPath) return null;
-
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    return {
-      slug,
-      frontmatter: {
-        title: data.title || 'Untitled Field Note',
-        slug,
-        category: data.category || 'Networking',
-        updatedAt: data.updatedAt || '2025-01-01',
-        summary: data.summary || '',
-        tags: data.tags || [],
-      } as FieldNoteFrontmatter,
+      } as BlogFrontmatter,
       content,
     };
   } catch {

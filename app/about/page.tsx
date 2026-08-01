@@ -1,106 +1,129 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { personalInfo, certifications, experiences } from '@/data/resumeData';
-import { Shield, GraduationCap, Award, CheckCircle2 } from 'lucide-react';
+import { Shield, Terminal, ArrowUpRight, Cpu, Lock, Award, BookOpen } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About Smriti Priya Singh — B.Tech CSE (Cybersecurity)',
-  description: 'Smriti Priya Singh: B.Tech in CSE (Cybersecurity Specialization) and founder of TechEthix.',
+  title: 'About — Smriti Priya Singh & TechEthix',
+  description: 'The personal narrative, engineering philosophy, and security research of Smriti Priya Singh.',
 };
 
 export default function AboutPage() {
   return (
-    <div className="pt-32 pb-20 max-w-4xl mx-auto px-4 sm:px-6 space-y-16">
+    <div className="pt-36 pb-28 max-w-4xl mx-auto px-4 sm:px-6 space-y-24">
       
-      {/* Header */}
-      <div className="space-y-4 text-center sm:text-left">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121215] border border-[#27272a] text-xs font-mono text-emerald-400">
-          <Shield className="w-3.5 h-3.5" />
-          <span>About Smriti Priya Singh</span>
+      {/* Narrative Hero Header */}
+      <div className="space-y-6">
+        <div className="flex items-center gap-2 text-xs font-mono text-[#6EA8FE]">
+          <Terminal className="w-4 h-4" />
+          <span>SMRITI PRIYA SINGH &bull; TECHETHIX FOUNDER</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          B.Tech in Computer Science & Engineering (Cybersecurity)
+        
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-[#F8F8F6] tracking-[-0.03em] leading-[1.1]">
+          Building & Defending Digital Infrastructure.
         </h1>
-        <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl">
-          Focused on threat detection, network security defense, incident response, and offensive testing. Actively expanding practical skills through hands-on labs and educational content creation via TechEthix.
+
+        <p className="text-lg sm:text-xl text-[#A1A1AA] leading-relaxed font-light max-w-3xl">
+          I am a Security Analyst & Defense Engineer pursuing B.Tech in CSE (Cybersecurity ’26) at Oriental College of Technology, Bhopal. My work sits at the intersection of network anomaly telemetry, CCTV surveillance hardening, and open-source cybersecurity education through TechEthix.
         </p>
       </div>
 
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        {/* Education */}
-        <div className="p-6 rounded-2xl bg-[#121215] border border-[#27272a] space-y-4">
-          <div className="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center text-emerald-400">
-            <GraduationCap className="w-4 h-4" />
-          </div>
-          <div>
-            <h2 className="text-base font-bold text-white">Education</h2>
-            <h3 className="text-xs font-semibold text-emerald-400 mt-1">{personalInfo.education.degree}</h3>
-            <p className="text-xs text-zinc-500 font-mono mt-0.5">{personalInfo.education.college} &bull; {personalInfo.education.duration}</p>
-          </div>
-          <p className="text-xs text-zinc-400 leading-relaxed">
-            Coursework includes Networking Fundamentals, Ethical Hacking, Cryptography, Digital Forensics, Linux, Cloud Security, and SOC Operations.
+      {/* Narrative Section 1: The Origin & Mission */}
+      <div className="space-y-6 border-t border-[#6EA8FE]/15 pt-12">
+        <div className="text-xs font-mono text-[#6EA8FE] uppercase tracking-widest">
+          01 &bull; THE ORIGIN & MISSION
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#F8F8F6] tracking-tight">
+          Bridging Theoretical Security and Real-World Defense
+        </h2>
+        <div className="prose prose-invert max-w-none text-[#A1A1AA] leading-relaxed space-y-4 text-sm sm:text-base">
+          <p>
+            My journey into cybersecurity began with a simple realization: standard security theory often breaks when exposed to live network environments. While textbook models focus on perimeter firewalls, real enterprise threats quietly move laterally through unmonitored internal subnets, legacy CCTV cameras, and misconfigured IoT nodes.
+          </p>
+          <p>
+            To address this gap, I founded <strong className="text-[#F8F8F6]">TechEthix</strong> — a YouTube platform and security journal where I document hands-on penetration testing walkthroughs, breakdown network packet anomalies, and release practical security engineering blueprints.
           </p>
         </div>
-
-        {/* Focus Areas */}
-        <div className="p-6 rounded-2xl bg-[#121215] border border-[#27272a] space-y-4">
-          <div className="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center text-emerald-400">
-            <Shield className="w-4 h-4" />
-          </div>
-          <h2 className="text-base font-bold text-white">Security Interests</h2>
-          <ul className="space-y-2 text-xs text-zinc-300">
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Real-Time Network Anomaly Detection</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>CCTV & IoT Surveillance Defense</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>TryHackMe, PicoCTF & OverTheWire Labs</span>
-            </li>
-          </ul>
-        </div>
-
       </div>
 
-      {/* Selected Highlights */}
-      <div className="space-y-6">
-        <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-          <Award className="w-5 h-5 text-amber-400" />
-          <span>Selected Experience Highlights</span>
+      {/* Narrative Section 2: Technical Arsenal & Defense Philosophy */}
+      <div className="space-y-8 border-t border-[#6EA8FE]/15 pt-12">
+        <div className="text-xs font-mono text-[#6EA8FE] uppercase tracking-widest">
+          02 &bull; DEFENSE PHILOSOPHY & ARSENAL
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#F8F8F6] tracking-tight">
+          Zero-Trust Telemetry & Practical Hardening
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {experiences.map((exp) => (
-            <div key={exp.role} className="p-5 rounded-2xl bg-[#121215] border border-[#27272a] space-y-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/20 inline-block">
-                {exp.date}
-              </span>
-              <h3 className="text-xs font-bold text-white leading-snug">{exp.role}</h3>
-              <p className="text-[11px] text-zinc-400">{exp.organization}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-3 bg-[#111114] p-6 rounded-2xl border border-[#6EA8FE]/15">
+            <div className="w-8 h-8 rounded-lg bg-[#6EA8FE]/10 flex items-center justify-center text-[#6EA8FE] mb-2">
+              <Shield className="w-4 h-4" />
             </div>
-          ))}
+            <h3 className="text-base font-bold text-[#F8F8F6]">Network & CCTV Hardening</h3>
+            <p className="text-xs text-[#A1A1AA] leading-relaxed">
+              Specialized in MAC address binding, 802.1X port security, and isolated VLAN architectures for IP surveillance networks across 50+ enterprise camera endpoints.
+            </p>
+          </div>
+
+          <div className="space-y-3 bg-[#111114] p-6 rounded-2xl border border-[#6EA8FE]/15">
+            <div className="w-8 h-8 rounded-lg bg-[#6EA8FE]/10 flex items-center justify-center text-[#6EA8FE] mb-2">
+              <Cpu className="w-4 h-4" />
+            </div>
+            <h3 className="text-base font-bold text-[#F8F8F6]">Threat Telemetry & Packet Analysis</h3>
+            <p className="text-xs text-[#A1A1AA] leading-relaxed">
+              Building real-time packet stream anomaly analyzers (Cisco Ideathon 2025 Top 20 Finalist) using Python, Wireshark, Suricata, and custom SOC rules.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Certifications Badges */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">Certifications & Training</h2>
-        <div className="flex flex-wrap gap-2">
-          {certifications.map((cert) => (
-            <span
-              key={cert.title}
-              className="px-3 py-1 rounded-full text-xs font-mono bg-[#121215] text-zinc-300 border border-[#27272a]"
-            >
-              {cert.title}
-            </span>
-          ))}
+      {/* Narrative Section 3: Milestones & Honors */}
+      <div className="space-y-8 border-t border-[#6EA8FE]/15 pt-12">
+        <div className="text-xs font-mono text-[#6EA8FE] uppercase tracking-widest">
+          03 &bull; RECOGNITION & ACADEMIC BACKDROP
         </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-[#F8F8F6] tracking-tight">
+          Milestones & Education
+        </h2>
+
+        <div className="space-y-4">
+          {experiences.map((exp) => (
+            <div
+              key={exp.role}
+              className="p-6 rounded-2xl bg-[#111114] border border-[#6EA8FE]/15 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            >
+              <div className="space-y-1">
+                <span className="text-xs font-mono text-[#6EA8FE]">{exp.date}</span>
+                <h3 className="text-base font-bold text-[#F8F8F6]">{exp.role}</h3>
+                <p className="text-xs text-[#A1A1AA]">{exp.organization}</p>
+              </div>
+              <Award className="w-5 h-5 text-[#6EA8FE] shrink-0" />
+            </div>
+          ))}
+
+          <div className="p-6 rounded-2xl bg-[#111114] border border-[#6EA8FE]/15 space-y-2">
+            <span className="text-xs font-mono text-[#6EA8FE]">ACADEMIC BACKGROUND</span>
+            <h3 className="text-base font-bold text-[#F8F8F6]">{personalInfo.education.degree}</h3>
+            <p className="text-xs text-[#A1A1AA]">{personalInfo.education.college} &bull; {personalInfo.education.duration}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="border-t border-[#6EA8FE]/15 pt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="space-y-1 text-center sm:text-left">
+          <h3 className="text-lg font-bold text-[#F8F8F6]">Want to discuss security or collaborate?</h3>
+          <p className="text-xs text-[#A1A1AA]">Open to security analyst roles, research labs, and technical discussions.</p>
+        </div>
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#6EA8FE] hover:bg-[#8BBEFF] text-[#050505] font-semibold text-xs transition-all duration-300 shadow-lg"
+        >
+          <span>Get in Touch</span>
+          <ArrowUpRight className="w-4 h-4" />
+        </Link>
       </div>
 
     </div>

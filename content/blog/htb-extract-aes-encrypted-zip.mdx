@@ -1,0 +1,112 @@
+---
+title: "Hack The Box — Extracting AES Encrypted ZIP Archives"
+publishedAt: "2026-08-01"
+summary: "A step-by-step HTB walkthrough on extracting WinZip AES-256 encrypted archives, zip2john hash extraction, GPU cracking, and root privilege escalation."
+category: "Hack The Box"
+readingTime: "6 min read"
+tags: ["HTB", "CTF", "AES Encryption", "John the Ripper", "Hashcat", "Privilege Escalation"]
+featured: true
+---
+
+# Hack The Box — Extracting AES Encrypted ZIP Archives
+
+A comprehensive penetration testing walkthrough on solving a **Hack The Box (HTB)** challenge involving password-protected and AES-256 encrypted ZIP archives.
+
+---
+
+## 🎯 Challenge Overview
+
+During enterprise security audits and CTF challenges, discovering password-protected archives (`.zip`, `.rar`, `.7z`) is common. Standard unzipping tools fail when AES-128 or AES-256 encryption is applied to the payload.
+
+In this HTB machine, we encountered an AES-encrypted ZIP file named `confidential_backup.zip`. Below is the exact methodology used to identify, extract, crack, and analyze the contents.
+
+---
+
+## 1. Initial Inspection & File Identification
+
+First, analyze the archive structure using Linux `file` utility and `7z`:
+
+```bash
+# Check file signature
+file confidential_backup.zip
+
+# List contents without extracting
+7z l confidential_backup.zip
+```
+
+Output confirmed **WinZip AES-256 encryption**:
+```text
+Method = AES-256
+Encrypted = +
+```
+
+---
+
+## 2. Extracting the Encryption Hash (`zip2john`)
+
+Standard `unzip` doesn't support direct dictionary cracking efficiently. We use `zip2john` from the John the Ripper suite to convert the ZIP header into a hash format readable by offline cracking tools.
+
+```bash
+# Extract hash to a text file
+zip2john confidential_backup.zip > zip_hash.txt
+```
+
+Example extracted hash signature:
+```text
+confidential_backup.zip:$zip2$*0*3*0*...*#/zip2$
+```
+
+---
+
+## 3. Cracking the AES Hash
+
+### Option A: Using John the Ripper with RockYou
+
+```bash
+john --wordlist=/usr/share/wordlists/rockyou.txt zip_hash.txt
+```
+
+### Option B: Using Hashcat for GPU Acceleration
+
+```bash
+# Identify Hashcat mode for ZIP (WinZip AES = Mode 13600)
+hashcat -m 13600 -a 0 zip_hash.txt /usr/share/wordlists/rockyou.txt --status
+```
+
+---
+
+## 4. Extracting the Decrypted Payload
+
+Once the plaintext password was recovered, we extracted the archive cleanly:
+
+```bash
+7z x confidential_backup.zip -p'hackthebox2025!'
+```
+
+Extracted sensitive files:
+- `id_rsa` (SSH Private Key)
+- `db_credentials.config`
+
+---
+
+## 5. Root Privilege Escalation & Flag Capture
+
+Using the extracted `id_rsa` SSH private key:
+
+```bash
+chmod 600 id_rsa
+ssh -i id_rsa user@10.10.11.X
+```
+
+After landing on the target machine, privilege escalation led directly to the root flag:
+
+```text
+HTB{a3s_z1p_cr4ck1ng_m4st3r3d}
+```
+
+---
+
+## 💡 Key Defensive Takeaways
+
+1. **Password Strength**: Weak archive passwords subject to dictionary attacks can lead to full infrastructure compromise.
+2. **Key Management**: Never store unencrypted private keys (`id_rsa`) inside compressed backups on public web paths.

@@ -31,7 +31,7 @@ export interface ExperienceItem {
   highlightBadge?: string;
 }
 
-export interface JournalFrontmatter {
+export interface BlogFrontmatter {
   title: string;
   slug: string;
   publishedAt: string;
@@ -40,13 +40,4 @@ export interface JournalFrontmatter {
   category: string;
   tags: string[];
   featured?: boolean;
-}
-
-export interface FieldNoteFrontmatter {
-  title: string;
-  slug: string;
-  category: 'Wazuh' | 'SOC Labs' | 'DFIR' | 'HTB' | 'TryHackMe' | 'Networking' | 'PicoCTF';
-  updatedAt: string;
-  summary: string;
-  tags: string[];
 }
